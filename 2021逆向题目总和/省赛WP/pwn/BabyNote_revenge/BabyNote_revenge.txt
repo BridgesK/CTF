@@ -1,0 +1,12 @@
+题目的环境是ubuntu20.04，需要的libc已经提供
+
+题目布置：
+1.首先需要使用提供的 libc 2.31,
+2.安装依赖库：sudo apt install libseccomp-dev libseccomp2 seccomp
+
+babynote_revenge是baby note的升级版，主要在以下方面增加了难度：
+1.堆块大小指定的同时增加堆块申请的次数限制，增大堆布局难度  
+2. 需要劫持stdout来泄漏libc地址 
+3.unsorted bin链表需要做修补，才能使得程序正常运行下去 
+4.泄漏libcbase之后，会触发沙箱的保护机制，这里只允许open read write系统调用，所以只能通过orw来读取flag。
+exp.py语言为python3，在运行的时候，由于需要爆破劫持stdout，需要多次运行exp.py，成功概率不低于1/16
